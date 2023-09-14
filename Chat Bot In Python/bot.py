@@ -56,4 +56,14 @@ def get_response(user_input):
 
 
 
+# Testing the response system
+while True:
+    user = input('You: ')
+    if user == 'q' or user =='Q':
+        break
+
+    i = get_response(user)
+    print('Bot ' + i)
+
+
 
