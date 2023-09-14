@@ -25,6 +25,30 @@ def message_probablity(user_message, recognised_words, single_response=False, re
 
 
 
+def check_all_message(message):
+    highest_prob_list = {}
+
+    def response(bot_response, list_of_words, single_response=False, required_words=[]):
+        nonlocal highest_prob_list
+
+        highest_prob_list[bot_response] = message_probablity(
+            message, list_of_words, single_response, required_words
+            )
+    
+    # response ---------------------
+    response('Hello!', ['hello','hey','sup','hey','heyo'], single_response=True )
+    response('I\'m doing fine and you?',['how','are','you', 'doing'], required_words=['how'])
+    response('Yes! I like coding',['Do','you','coding'],required_words=['you','coding'])
+    response(long.r_eating,['what','you','eat'],required_words=['you','eat'])
+
+    best_match = max(highest_prob_list,key=highest_prob_list.get)
+
+    # print(highest_prob_list)
+
+    return long.unknown() if highest_prob_list[best_match] < 1 else best_match
+
+
+
 
 
 
