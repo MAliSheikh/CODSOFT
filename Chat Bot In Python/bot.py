@@ -2,7 +2,10 @@ import re
 import long_responses as long   
 
 
-def message_probablity(user_message, recognised_words, single_response=False, required_words=[]):
+def message_probablity(
+        user_message, recognised_words, single_response=False,
+        required_words=[]
+        ):
     message_certainity = 0
     has_required_words = True
 
@@ -28,7 +31,10 @@ def message_probablity(user_message, recognised_words, single_response=False, re
 def check_all_message(message):
     highest_prob_list = {}
 
-    def response(bot_response, list_of_words, single_response=False, required_words=[]):
+    def response(
+            bot_response, list_of_words, single_response=False, 
+            required_words=[]
+            ):
         nonlocal highest_prob_list
 
         highest_prob_list[bot_response] = message_probablity(
@@ -36,6 +42,7 @@ def check_all_message(message):
             )
     
     # response ---------------------
+    
     response('Hello!', ['hello','hey','sup','hey','heyo'], single_response=True )
     response('I\'m doing fine and you?',['how','are','you', 'doing'], required_words=['how'])
     response('Yes! I like coding',['Do','you','coding'],required_words=['you','coding'])
