@@ -48,11 +48,10 @@ def check_all_message(message):
     return long.unknown() if highest_prob_list[best_match] < 1 else best_match
 
 
-
-
-
-
-
+def get_response(user_input):
+    split_message = re.split(r'\s+|[,;?!.-]\s*',user_input.lower())
+    response = check_all_message(split_message) 
+    return response
 
 
 
