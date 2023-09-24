@@ -9,7 +9,6 @@ def get_data(csv_file):
     return data
 
 
-db_movies = get_data('tmdb_5000_movies.csv')
 
 def calculate_cosine_similarity(df, text_column):
     tfidf = TfidfVectorizer(stop_words='english')
@@ -24,4 +23,21 @@ def calculate_cosine_similarity(df, text_column):
     
     return cosine_sim, indices
 
-cosine_sim, indices = calculate_cosine_similarity(db_movies, 'overview')
+def get_recommendation(title, cosine_sim, indices):
+    idx = indices[title]
+    sim_scores = enumerate(cosine_sim[idx])
+
+    sim_scores = sorted(sim_scores, key = lambda x: x[1], reverse = True)   
+
+    sim_scores = sim_scores[1:11]
+    
+    sim_index = [i[0] for i in sim_scores]
+    
+    print(db_movies['original_title'].iloc[sim_index])
+
+
+db_movies = get_data('tmdb_5000_movies.csv')
+
+recommendations = get_recommendation("The Dark Knight Rises", cosine_similarity_matrix, movie_indices)
+
+print(recommendations)
