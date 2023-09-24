@@ -37,7 +37,7 @@ def get_recommendation(title, cosine_sim, indices):
 
 
 db_movies = get_data('tmdb_5000_movies.csv')
+cosine_similarity_matrix, movie_indices = calculate_cosine_similarity(db_movies, 'overview')
 
 recommendations = get_recommendation("The Dark Knight Rises", cosine_similarity_matrix, movie_indices)
-
 print(recommendations)
